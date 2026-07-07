@@ -51,28 +51,160 @@ export default function Login(){
 
 
     return(
-        <div>
+       <div
+  style={{
+    minHeight: "80vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+>
+  <div
+    style={{
+      width: "100%",
+      maxWidth: "450px",
+      background: "#1c1c1c",
+      padding: "40px",
+      borderRadius: "15px",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.5)",
+    }}
+  >
+    <h1
+      style={{
+        textAlign: "center",
+        color: "white",
+        marginBottom: "35px",
+        fontSize: "2.5rem",
+      }}
+    >
+      Login
+    </h1>
 
-            <form onSubmit={SubmitForm}>
-                <div>
-                    <label htmlFor="email" >Email: </label>
-                    <input type="email" placeholder="@gmai.com" value={email} onChange={(e)=>emailFunc(e.target.value)} />
-                </div>
-                <div>
-                    <label htmlFor="password" >Password: </label>
-                    <input type="password" placeholder="enter password" value={password} onChange={(e)=>passwordFunc(e.target.value)}/>
-                </div>
-                <button type="submit">Log In</button>
-            </form>
+    <form
+      onSubmit={SubmitForm}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+      }}
+    >
+      <div>
+        <label
+          style={{
+            color: "white",
+            fontWeight: "600",
+            display: "block",
+            marginBottom: "8px",
+          }}
+        >
+          Email
+        </label>
 
-            <p>
-                <Link href={"/forgot_password"}>Forgot password?</Link>
-            </p>
-            <p>
-                Don't have an account? {""}
-                <Link href={"/signup"}>Create an account.</Link>
-            </p>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => emailFunc(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "8px",
+            border: "1px solid #555",
+            background: "#2a2a2a",
+            color: "white",
+            fontSize: "16px",
+            outline: "none",
+            boxSizing: "border-box",
+          }}
+        />
+      </div>
 
-        </div>
+      <div>
+        <label
+          style={{
+            color: "white",
+            fontWeight: "600",
+            display: "block",
+            marginBottom: "8px",
+          }}
+        >
+          Password
+        </label>
+
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => passwordFunc(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "8px",
+            border: "1px solid #555",
+            background: "#2a2a2a",
+            color: "white",
+            fontSize: "16px",
+            outline: "none",
+            boxSizing: "border-box",
+          }}
+        />
+      </div>
+
+      <button
+        type="submit"
+        style={{
+          padding: "14px",
+          border: "none",
+          borderRadius: "8px",
+          background: "#e50914",
+          color: "white",
+          fontSize: "17px",
+          fontWeight: "bold",
+          cursor: "pointer",
+        }}
+      >
+        Log In
+      </button>
+    </form>
+
+    <div
+      style={{
+        marginTop: "25px",
+        textAlign: "center",
+      }}
+    >
+      <Link
+        href="/forgot_password"
+        style={{
+          color: "#4da6ff",
+          textDecoration: "none",
+          fontSize: "15px",
+        }}
+      >
+        Forgot Password?
+      </Link>
+
+      <p
+        style={{
+          marginTop: "20px",
+          color: "#ccc",
+          fontSize: "15px",
+        }}
+      >
+        Don't have an account?{" "}
+        <Link
+          href="/signup"
+          style={{
+            color: "#4da6ff",
+            textDecoration: "none",
+            fontWeight: "600",
+          }}
+        >
+          Create an account
+        </Link>
+      </p>
+    </div>
+  </div>
+</div>
     )
 }

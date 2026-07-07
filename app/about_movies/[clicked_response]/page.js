@@ -25,59 +25,118 @@ export default async function aboutMovie({params}){
         //     <img src={movie_founded.primaryImage} style={{width: "350px",height: "400px"}}></img>
         //     <p>{movie_founded.description}</p>
         // </div>
-        <div
-            style={{
-                maxWidth: "1200px",
-                margin: "40px auto",
-                padding: "20px",
-                display: "flex",
-                gap: "40px",
-                alignItems: "flex-start",
-            }}
-            >
+       <div
+  style={{
+    maxWidth: "1400px",
+    margin: "50px auto",
+    padding: "30px",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "50px",
+    justifyContent: "center",
+    alignItems: "flex-start",
+  }}
+>
+  {/* Movie Poster */}
+  <div
+    style={{
+      flex: "0 0 350px",
+    }}
+  >
+    <img
+      src={movie_founded.primaryImage}
+      alt={movie_founded.primaryTitle}
+      style={{
+        width: "100%",
+        aspectRatio: "2 / 3",
+        objectFit: "cover",
+        borderRadius: "15px",
+        boxShadow: "0 10px 25px rgba(0,0,0,0.5)",
+      }}
+    />
+  </div>
 
-            <img
-                src={movie_founded.primaryImage}
-                alt={movie_founded.primaryTitle}
-                style={{
-                width: "350px",
-                height: "500px",
-                objectFit: "cover",
-                borderRadius: "12px",
-                boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
-                }}
-            />
+  {/* Movie Information */}
+  <div
+    style={{
+      flex: "1",
+      minWidth: "350px",
+      color: "white",
+    }}
+  >
+    <h1
+      style={{
+        fontSize: "3rem",
+        marginBottom: "25px",
+        fontWeight: "700",
+      }}
+    >
+      {movie_founded.primaryTitle}
+    </h1>
 
-                <div style={{ flex: 1 }}>
-                        <h1
-                        style={{
-                            fontSize: "2.5rem",
-                            marginBottom: "20px",
-                        }}
-                        >
-                        {movie_founded.primaryTitle}
-                        </h1>
+    <hr
+      style={{
+        border: "none",
+        height: "2px",
+        background: "#444",
+        marginBottom: "30px",
+      }}
+    />
 
-                        <h2
-                        style={{
-                            marginBottom: "15px",
-                            color: "#666",
-                        }}
-                        >
-                        About
-                        </h2>
+    <h2
+      style={{
+        fontSize: "2rem",
+        marginBottom: "20px",
+        color: "#e50914",
+      }}
+    >
+      Overview
+    </h2>
 
-                        <p
-                        style={{
-                            lineHeight: "1.8",
-                            fontSize: "1.1rem",
-                            textAlign: "justify",
-                        }}
-                        >
-                        {movie_founded.description}
-                        </p>
-                    
-                </div>
-            </div>
+    <p
+      style={{
+        fontSize: "1.15rem",
+        lineHeight: "2",
+        textAlign: "justify",
+        color: "#d8d8d8",
+      }}
+    >
+      {movie_founded.description || "No description available."}
+    </p>
+
+    <div
+      style={{
+        marginTop: "35px",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+        gap: "18px",
+      }}
+    >
+      <div>
+        <strong>Release Year:</strong>
+        <br />
+        {movie_founded.startYear}
+      </div>
+
+      <div>
+        <strong>Runtime:</strong>
+        <br />
+        {movie_founded.runtimeMinutes} Minutes
+      </div>
+
+      <div>
+        <strong>Rating:</strong>
+        <br />
+        ⭐ {movie_founded.averageRating}
+      </div>
+
+      <div>
+        <strong>Genres:</strong>
+        <br />
+        {movie_founded.genres}
+      </div>
+    </div>
+  </div>
+</div>
     )
 }

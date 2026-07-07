@@ -31,19 +31,154 @@ export default function SignUp()
     }
 
     return(
-        <div>
-            <form onSubmit={FormResult}>
-                <label htmlFor="text">Name: </label>
-                <input type="text" placeholder="enter name" value={name} onChange={(e)=>nameFunc(e.target.value)}/>
-                <br/>
-                <label htmlFor="text">Email: </label>
-                <input type="email" placeholder="@gmail.com" value={email} onChange={(e)=>emailFunc(e.target.value)}/>
-                <br/>
-                <label htmlFor="password">Password: </label>
-                <input type="password" placeholder="enter password" value={password} onChange={(e)=>passwordFunc(e.target.value)}/>          
-                <br/>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+       <div
+  style={{
+    minHeight: "80vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+>
+  <div
+    style={{
+      width: "100%",
+      maxWidth: "450px",
+      background: "#1c1c1c",
+      padding: "40px",
+      borderRadius: "15px",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.5)",
+    }}
+  >
+    <h1
+      style={{
+        textAlign: "center",
+        color: "white",
+        marginBottom: "35px",
+        fontSize: "2.5rem",
+      }}
+    >
+      Create Account
+    </h1>
+
+    <form
+      onSubmit={FormResult}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+      }}
+    >
+      <div>
+        <label
+          style={{
+            color: "white",
+            fontWeight: "600",
+            display: "block",
+            marginBottom: "8px",
+          }}
+        >
+          Name
+        </label>
+
+        <input
+          type="text"
+          placeholder="Enter your name"
+          value={name}
+          onChange={(e) => nameFunc(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "8px",
+            border: "1px solid #555",
+            background: "#2a2a2a",
+            color: "white",
+            fontSize: "16px",
+            outline: "none",
+            boxSizing: "border-box",
+          }}
+        />
+      </div>
+
+      <div>
+        <label
+          style={{
+            color: "white",
+            fontWeight: "600",
+            display: "block",
+            marginBottom: "8px",
+          }}
+        >
+          Email
+        </label>
+
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => emailFunc(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "8px",
+            border: "1px solid #555",
+            background: "#2a2a2a",
+            color: "white",
+            fontSize: "16px",
+            outline: "none",
+            boxSizing: "border-box",
+          }}
+        />
+      </div>
+
+      <div>
+        <label
+          style={{
+            color: "white",
+            fontWeight: "600",
+            display: "block",
+            marginBottom: "8px",
+          }}
+        >
+          Password
+        </label>
+
+        <input
+          type="password"
+          placeholder="Create a password"
+          value={password}
+          onChange={(e) => passwordFunc(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "14px",
+            borderRadius: "8px",
+            border: "1px solid #555",
+            background: "#2a2a2a",
+            color: "white",
+            fontSize: "16px",
+            outline: "none",
+            boxSizing: "border-box",
+          }}
+        />
+      </div>
+
+      <button
+        type="submit"
+        style={{
+          padding: "14px",
+          border: "none",
+          borderRadius: "8px",
+          background: "#e50914",
+          color: "white",
+          fontSize: "17px",
+          fontWeight: "bold",
+          cursor: "pointer",
+          marginTop: "10px",
+        }}
+      >
+        Create Account
+      </button>
+    </form>
+  </div>
+</div>
     )
 } 

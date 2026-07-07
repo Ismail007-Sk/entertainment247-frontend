@@ -12,26 +12,84 @@ const genre_based_movies = movies.filter((movie) =>{
 );
 
     return(
-        <div>
-            <h2>{clicked_response.toUpperCase()} Movies</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(5 , 1fr)", gap:"10px"}}>
-                {genre_based_movies.map((movie)=>(
-                <div key={movie.id}>
-                    <Link href={`/about_movies/${movie.id}`}>
-                        <img src={movie.primaryImage}   
-                        style={{
-                                width: "320px",
-                                height: "370px",
-                                objectFit: "cover",
-                                borderRadius: "10px",
-                                cursor: "pointer",
-                            }}/> 
-                    </Link> 
-                    <h3>{movie.primaryTitle}</h3>
-                </div>
-                ))}
-            </div>
-            
-        </div>
+        <div
+  style={{
+    maxWidth: "1500px",
+    margin: "50px auto",
+    padding: "20px",
+  }}
+>
+  <h1
+    style={{
+      textAlign: "center",
+      fontSize: "3rem",
+      fontWeight: "700",
+      marginBottom: "40px",
+      color: "white",
+      textTransform: "capitalize",
+    }}
+  >
+    🎬 {clicked_response} Movies
+  </h1>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+      gap: "35px",
+    }}
+  >
+    {genre_based_movies.map((movie) => (
+      <div
+        key={movie.id}
+        style={{
+          background: "#1c1c1c",
+          borderRadius: "15px",
+          overflow: "hidden",
+          boxShadow: "0 8px 20px rgba(0,0,0,0.45)",
+          transition: "transform 0.3s ease",
+        }}
+      >
+        <Link
+          href={`/about_movies/${movie.id}`}
+          style={{
+            textDecoration: "none",
+            color: "inherit",
+          }}
+        >
+          <img
+            src={movie.primaryImage}
+            alt={movie.primaryTitle}
+            style={{
+              width: "100%",
+              aspectRatio: "2 / 3",
+              objectFit: "cover",
+              display: "block",
+              cursor: "pointer",
+            }}
+          />
+
+          <div
+            style={{
+              padding: "18px",
+            }}
+          >
+            <h3
+              style={{
+                margin: 0,
+                color: "white",
+                fontSize: "1.25rem",
+                fontWeight: "600",
+                textAlign: "center",
+              }}
+            >
+              {movie.primaryTitle}
+            </h3>
+          </div>
+        </Link>
+      </div>
+    ))}
+  </div>
+</div>
     )
 }

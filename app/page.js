@@ -60,67 +60,153 @@ export default function Home()
   }
   
  return(
-  <div>
-    <div  style={{
-    position: "fixed",
-    top: "124px",
-    right: "420px",
-    zIndex: 9999,
-    }}>
-      <form onSubmit={searchMovie} >
-        <input placeholder="search movies" value={search} onChange={(e)=>searchFunction(e.target.value)} 
-         style={{
-        width: "260px",
-        padding: "10px 15px",
-        borderRadius: "20px",
-        border: "1px solid #555",
-        outline: "none",
-        background: "#2a2a2a",
-        color: "white",
-      }}/>
-        <button type="submit" style={{
-        width: "80px",
-        padding: "10px 15px",
-        borderRadius: "20px",
-        border: "1px solid #555",
-        outline: "none",
-        background: "#2a2a2a",
-        color: "white",
-      }}>Seacrh</button>
-      </form>
-    </div>
-    
+ <div
+  style={{
+    maxWidth: "1600px",
+    margin: "0 auto",
+    padding: "20px",
+  }}
+>
+  {/* Search Bar */}
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      marginBottom: "35px",
+    }}
+  >
+    <form
+      onSubmit={searchMovie}
+      style={{
+        display: "flex",
+        gap: "10px",
+      }}
+    >
+      <input
+        placeholder="Search movies..."
+        value={search}
+        onChange={(e) => searchFunction(e.target.value)}
+        style={{
+          width: "350px",
+          padding: "12px 18px",
+          borderRadius: "30px",
+          border: "1px solid #555",
+          outline: "none",
+          background: "#2a2a2a",
+          color: "white",
+          fontSize: "16px",
+        }}
+      />
 
-  
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(5 , 1fr)", gap:"10px"}}>
-      {currentMovies.map((movie)=>{
-        return(
-          <div key={movie.id}>
-            <Link href={`/about_movies/${movie.id}`}>
-              <img src={movie.primaryImage}  
-              style={{
-                width: "320px",
-                height: "327px",
-                objectFit: "cover",
-                borderRadius: "10px",
-                cursor: "pointer",
-              }}/> 
-            </Link> 
-           
-            <h3>{movie.primaryTitle}</h3>
-          </div>
-        )
-      })
-      }
-    </div>
-
-    {search=="" && (
-      <>
-        <br/>
-        <button onClick={()=>pageFunction(page-1)} style={{width:"49vw" ,height:"5vh"}}>Prev</button>
-        <button onClick={()=>pageFunction(page+1)} style={{width:"49vw" ,height:"5vh"}}>Next</button>  
-      </>
-    )}
+      <button
+        type="submit"
+        style={{
+          padding: "12px 25px",
+          borderRadius: "30px",
+          border: "none",
+          background: "#e50914",
+          color: "white",
+          fontSize: "15px",
+          fontWeight: "bold",
+          cursor: "pointer",
+        }}
+      >
+        Search
+      </button>
+    </form>
   </div>
+
+  {/* Movie Grid */}
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+      gap: "25px",
+    }}
+  >
+    {currentMovies.map((movie) => (
+      <div
+        key={movie.id}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Link href={`/about_movies/${movie.id}`}>
+          <img
+            src={movie.primaryImage}
+            alt={movie.primaryTitle}
+            style={{
+              width: "100%",
+              aspectRatio: "2 / 3",
+              objectFit: "cover",
+              borderRadius: "12px",
+              cursor: "pointer",
+              transition: "0.3s ease",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
+            }}
+          />
+        </Link>
+
+        <h3
+          style={{
+            marginTop: "12px",
+            color: "white",
+            fontSize: "20px",
+            fontWeight: "600",
+            textAlign: "center",
+          }}
+        >
+          {movie.primaryTitle}
+        </h3>
+      </div>
+    ))}
+  </div>
+
+  {/* Pagination */}
+  {search === "" && (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: "40px",
+      }}
+    >
+      <button
+        onClick={() => pageFunction(page - 1)}
+        style={{
+          width: "180px",
+          height: "50px",
+          borderRadius: "8px",
+          border: "none",
+          background: "#e50914",
+          color: "white",
+          fontSize: "16px",
+          fontWeight: "bold",
+          cursor: "pointer",
+        }}
+      >
+        Previous
+      </button>
+
+      <button
+        onClick={() => pageFunction(page + 1)}
+        style={{
+          width: "180px",
+          height: "50px",
+          borderRadius: "8px",
+          border: "none",
+          background: "#e50914",
+          color: "white",
+          fontSize: "16px",
+          fontWeight: "bold",
+          cursor: "pointer",
+        }}
+      >
+        Next
+      </button>
+    </div>
+  )}
+</div>
  )
 }
