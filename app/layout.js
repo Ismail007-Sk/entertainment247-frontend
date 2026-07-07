@@ -20,33 +20,68 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>
+  <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <body
+      style={{
+        margin: 0,
+        background: "#121212",
+        color: "white",
+        minHeight: "100vh",
+        fontFamily: "'Poppins', Arial, sans-serif",
+      }}
+    >
+      <AuthProvider>
+        {/* Website Logo */}
+        <header
+          style={{
+            padding: "25px 20px 15px",
+            textAlign: "center",
+            borderBottom: "1px solid #2c2c2c",
+            background: "#181818",
+          }}
+        >
           <h1
             style={{
-              fontFamily: "'Poppins', Arial, sans-serif",
+              margin: 0,
               fontSize: "3.5rem",
-              fontWeight: 800,
-              textAlign: "center",
-              letterSpacing: "2px",
-              margin: "20px 0",
+              fontWeight: "800",
+              letterSpacing: "3px",
               textTransform: "uppercase",
-              color: "#ffffff",
-              textShadow:
-                "0 0 10px rgba(255,255,255,0.3), 0 0 20px rgba(0,0,0,0.4)",
+              color: "white",
             }}
           >
             Entertainment{" "}
-            <span style={{ color: "#ff3b30" }}>24</span>/
+            <span style={{ color: "#e50914" }}>24</span>/
             <span style={{ color: "#2196f3" }}>7</span>
-        </h1>
-        <AuthProvider>
+          </h1>
 
-          <Navbar/>
+          <p
+            style={{
+              marginTop: "10px",
+              color: "#bdbdbd",
+              fontSize: "1rem",
+              letterSpacing: "1px",
+            }}
+          >
+            Entertainment Never Stops
+          </p>
+        </header>
+
+        {/* Navigation */}
+        <Navbar />
+
+        {/* Main Content */}
+        <main
+          style={{
+            maxWidth: "1700px",
+            margin: "40px auto",
+            padding: "0 25px",
+          }}
+        >
           {children}
-          
-        </AuthProvider>
-      </body>
-    </html>
-  );
+        </main>
+      </AuthProvider>
+    </body>
+  </html>
+);
 }
