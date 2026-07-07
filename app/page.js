@@ -1,66 +1,126 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+import { useState,useEffect } from "react";
+import { movies } from "@/data";
+import Link from "next/link";
+
+
+
+export default function Home()
+{
+
+  // #################################################################
+  // // Collected from RapidApi
+  // const url = "https://imdb236.p.rapidapi.com/api/imdb/cast/nm0000190/titles"
+  // const options = {
+	//   method: 'GET',
+	//   headers: {
+	// 	'x-rapidapi-key': '89406bf89cmsh9566770aaeb4227p1bc432jsn9448bfd3673b',
+	// 	'x-rapidapi-host': 'imdb236.p.rapidapi.com',
+	// 	'Content-Type': 'application/json'
+  //     }
+  //   };
+  
+  // const [ films , filmFunction] = useState([])
+  
+  
+  // useEffect(()=>{
+  //   async function getMovies()
+  //   {   
+  //       let responce = await fetch(url,options)
+  //       let movies = await responce.json()
+  //       filmFunction(movies)
+  //   }
+  //   getMovies()
+  // },[])
+  // #################################################################
+
+  const [ page , pageFunction ] = useState(1)
+  const [ search , searchFunction ] = useState("")
+  const [ searchTerm , setSearchTerm ] = useState("")
+
+
+  const singlePageMovies = 10
+  const start = (page - 1)*singlePageMovies
+  const end = start + singlePageMovies
+
+
+  const searchedMovie = movies.filter((movie)=>{
+    return movie.primaryTitle.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()) 
+  })
+
+
+  // Ternary operator
+  const currentMovies = search==""?movies.slice(start,end):searchedMovie
+
+  function searchMovie(e)
+  {
+    e.preventDefault()
+    setSearchTerm(search)
+  }
+  
+ return(
+  <div>
+    <div  style={{
+    position: "fixed",
+    top: "124px",
+    right: "420px",
+    zIndex: 9999,
+    }}>
+      <form onSubmit={searchMovie} >
+        <input placeholder="search movies" value={search} onChange={(e)=>searchFunction(e.target.value)} 
+         style={{
+        width: "260px",
+        padding: "10px 15px",
+        borderRadius: "20px",
+        border: "1px solid #555",
+        outline: "none",
+        background: "#2a2a2a",
+        color: "white",
+      }}/>
+        <button type="submit" style={{
+        width: "80px",
+        padding: "10px 15px",
+        borderRadius: "20px",
+        border: "1px solid #555",
+        outline: "none",
+        background: "#2a2a2a",
+        color: "white",
+      }}>Seacrh</button>
+      </form>
     </div>
-  );
+    
+
+  
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(5 , 1fr)", gap:"10px"}}>
+      {currentMovies.map((movie)=>{
+        return(
+          <div key={movie.id}>
+            <Link href={`/about_movies/${movie.id}`}>
+              <img src={movie.primaryImage}  
+              style={{
+                width: "320px",
+                height: "327px",
+                objectFit: "cover",
+                borderRadius: "10px",
+                cursor: "pointer",
+              }}/> 
+            </Link> 
+           
+            <h3>{movie.primaryTitle}</h3>
+          </div>
+        )
+      })
+      }
+    </div>
+
+    {search=="" && (
+      <>
+        <br/>
+        <button onClick={()=>pageFunction(page-1)} style={{width:"49vw" ,height:"5vh"}}>Prev</button>
+        <button onClick={()=>pageFunction(page+1)} style={{width:"49vw" ,height:"5vh"}}>Next</button>  
+      </>
+    )}
+  </div>
+ )
 }

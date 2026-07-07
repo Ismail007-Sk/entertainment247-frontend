@@ -47,3 +47,91 @@ a {
     color-scheme: dark;
   }
 }
+
+
+
+/* ===========================
+   Profile Drawer
+=========================== */
+.DrawerBody{
+
+  /* background: #b36060;  */
+  position: fixed;
+  inset: 0;
+  z-index: 1000; 
+
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.InnerDrawer{
+
+  background:#c53434;
+  width: 280px;
+  max-width: 80%;
+  height: 100vh;
+  padding: 20px;
+
+  animation: slideInRight 0.35s ease-out;
+
+}
+
+
+.InnerDrawer button{
+
+  width:100%;
+  padding:10px;
+  cursor:pointer;
+  border-radius: 6px;
+  background: #51523f;
+  color:rgb(243, 243, 242);
+
+  
+  
+}
+
+.InnerDrawer button:hover{
+  background: #7a6060;
+}
+
+.InnerDrawer.closing {
+  animation: slideOutRight 0.35s ease-in forwards;
+}
+
+
+
+/* Generally for phones */
+@media (max-width: 600px) {
+  .InnerDrawer {
+    width: 200px;
+    max-width: 90%;
+
+  }
+}
+
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+
+
+
+
+
