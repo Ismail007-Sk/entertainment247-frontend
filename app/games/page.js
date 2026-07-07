@@ -109,48 +109,203 @@ export default function AllGames(){
     const current_games = games.slice(start,end)
 
     return(
-        <div>
+<div
+  style={{
+    maxWidth: "1400px",
+    margin: "50px auto",
+    padding: "30px",
+    color: "white",
+  }}
+>
+  <h1
+    style={{
+      textAlign: "center",
+      fontSize: "3rem",
+      marginBottom: "35px",
+      color: "#e50914",
+    }}
+  >
+    🎮 Available Games
+  </h1>
 
-            <h1>Available Games</h1>
-            <br/>
-            <form onSubmit={submitFrom}>
-                <input type="text" placeholder="search games" value={game_name} onChange={(e)=>setSeacrh(e.target.value)}/>
-                <button type="submit">Search</button>
-            </form>
-            <br/>
-            <select value={filter} onChange={(e)=>setFilter(e.target.value)}>
-                <option value="all">All Games</option>
-                <option value="asc">Price Low → High</option>
-                <option value="dsc">Price High → Low</option>
-                <option value="less">Less Price</option>
-            </select>
-            {filter=="less" &&
-            (
-                <select value={price} onChange={(e)=>setPrice(e.target.value)}>
-                    <option value="500">500</option>
-                    <option value="1000">1000</option>
-                    <option value="1500">1500</option>
-                    <option value="2000">2000</option>
-                </select>
-            )
-            }
-            <br/>
-            <br/>
-            <hr/>
-            {current_games.map((game)=>(
-                <div key={game.game_id}>
-                    <hr></hr>
-                    <h3>{game.game_name}</h3>
-                    <h4>Price: {game.price} Rs</h4>
-                    <h4>Story: {game.story}</h4>
-                </div>
-            ))}
-            <br/>
-            <br/>
-            <button onClick={()=>setPage(page-1)} style={{width:"49vw" ,height:"5vh"}}>Prev</button>
-            <button onClick={()=>setPage(page+1)} style={{width:"49vw" ,height:"5vh"}}>Next</button> 
+  {/* Search & Filter */}
+  <div
+    style={{
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      gap: "15px",
+      marginBottom: "35px",
+    }}
+  >
+    <form
+      onSubmit={submitFrom}
+      style={{
+        display: "flex",
+        gap: "10px",
+      }}
+    >
+      <input
+        type="text"
+        placeholder="Search games..."
+        value={game_name}
+        onChange={(e) => setSeacrh(e.target.value)}
+        style={{
+          width: "320px",
+          padding: "12px",
+          borderRadius: "8px",
+          border: "1px solid #555",
+          background: "#2a2a2a",
+          color: "white",
+          fontSize: "16px",
+          outline: "none",
+        }}
+      />
 
-        </div>
+      <button
+        type="submit"
+        style={{
+          padding: "12px 20px",
+          border: "none",
+          borderRadius: "8px",
+          background: "#e50914",
+          color: "white",
+          fontWeight: "bold",
+          cursor: "pointer",
+        }}
+      >
+        Search
+      </button>
+    </form>
+
+    <select
+      value={filter}
+      onChange={(e) => setFilter(e.target.value)}
+      style={{
+        padding: "12px",
+        borderRadius: "8px",
+        background: "#2a2a2a",
+        color: "white",
+        border: "1px solid #555",
+      }}
+    >
+      <option value="all">All Games</option>
+      <option value="asc">Price: Low → High</option>
+      <option value="dsc">Price: High → Low</option>
+      <option value="less">Below Price</option>
+    </select>
+
+    {filter === "less" && (
+      <select
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+        style={{
+          padding: "12px",
+          borderRadius: "8px",
+          background: "#2a2a2a",
+          color: "white",
+          border: "1px solid #555",
+        }}
+      >
+        <option value="500">₹500</option>
+        <option value="1000">₹1000</option>
+        <option value="1500">₹1500</option>
+        <option value="2000">₹2000</option>
+      </select>
+    )}
+  </div>
+
+  {/* Games Grid */}
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(330px, 1fr))",
+      gap: "25px",
+    }}
+  >
+    {current_games.map((game) => (
+      <div
+        key={game.game_id}
+        style={{
+          background: "#1c1c1c",
+          borderRadius: "15px",
+          padding: "25px",
+          boxShadow: "0 8px 20px rgba(0,0,0,0.45)",
+        }}
+      >
+        <h2
+          style={{
+            color: "#ffffff",
+            marginBottom: "15px",
+          }}
+        >
+          {game.game_name}
+        </h2>
+
+        <p
+          style={{
+            color: "#e50914",
+            fontSize: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          ₹{game.price}
+        </p>
+
+        <p
+          style={{
+            color: "#d8d8d8",
+            lineHeight: "1.8",
+            marginTop: "15px",
+          }}
+        >
+          {game.story}
+        </p>
+      </div>
+    ))}
+  </div>
+
+  {/* Pagination */}
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      marginTop: "40px",
+    }}
+  >
+    <button
+      onClick={() => setPage(page - 1)}
+      style={{
+        width: "180px",
+        height: "50px",
+        border: "none",
+        borderRadius: "8px",
+        background: "#e50914",
+        color: "white",
+        fontWeight: "bold",
+        cursor: "pointer",
+      }}
+    >
+      Previous
+    </button>
+
+    <button
+      onClick={() => setPage(page + 1)}
+      style={{
+        width: "180px",
+        height: "50px",
+        border: "none",
+        borderRadius: "8px",
+        background: "#e50914",
+        color: "white",
+        fontWeight: "bold",
+        cursor: "pointer",
+      }}
+    >
+      Next
+    </button>
+  </div>
+</div>
     )
 
     

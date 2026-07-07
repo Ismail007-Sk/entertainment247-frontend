@@ -39,83 +39,168 @@ export default function Navbar()
 
 
     return(
+<div>
+  <nav
+    style={{
+      maxWidth: "1700px",
+      margin: "20px auto",
+      padding: "15px 30px",
+      background: "#1c1c1c",
+      borderRadius: "15px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      boxShadow: "0 8px 20px rgba(0,0,0,0.45)",
+    }}
+  >
+    {/* Left Navigation */}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "28px",
+      }}
+    >
+      <Link
+        href="/"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          fontWeight: "600",
+        }}
+      >
+        🏠 Home
+      </Link>
 
+      <Link
+        href="/trend"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          fontWeight: "600",
+        }}
+      >
+        🔥 Trending
+      </Link>
 
-        <div >
-            <nav   style={{
-    display: "flex",
-    alignItems: "center",
-    background: "#1b1b1b",
-    padding: "12px 20px",
-    gap: "15px",
-  }}>
+      <Link
+        href="/genre"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          fontWeight: "600",
+        }}
+      >
+        🎭 Genres
+      </Link>
 
-            
+      <Link
+        href="/games"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          fontWeight: "600",
+        }}
+      >
+        🎮 Games
+      </Link>
 
-            <Link href="/">Home</Link>
-            {" | "}
-            <Link href="/trend">Trend</Link>
-            {" | "}
-            <Link href="/genre">Genre</Link>
-            {" | "}
-            <Link href="/about">about</Link>
-            {" | "}
-            <Link href="/contact">Contact</Link>
-            {" | "}
-            <Link href="/games">Games Store</Link>
-            {" | "}
-            
+      <Link
+        href="/about"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          fontWeight: "600",
+        }}
+      >
+        ℹ️ About
+      </Link>
 
-            { user  ? 
-            (
-            <>
-                <button
-                    onClick={() => setDrawer(true)}
-                            style={{
-                                border: "none",
-                                background: "none",
-                                cursor: "pointer",
-                                fontSize: "16px"
-                            }}
-                    >
+      <Link
+        href="/contact"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          fontWeight: "600",
+        }}
+      >
+        📞 Contact
+      </Link>
 
-                            👤 Profile
-                </button>
-            </>
-            )
-             : 
-            (
-            <>
-                <Link href="/login">Log in</Link>
-                {" | "}
-                <Link href="/signup">Sign up</Link>
-            
-            </>
-            )
-            }
+      {user?.user?.role === "admin" && (
+        <Link
+          href="/admin"
+          style={{
+            color: "#e50914",
+            textDecoration: "none",
+            fontWeight: "700",
+          }}
+        >
+          🛠️ Admin
+        </Link>
+      )}
+    </div>
 
-            { user?.user.role=="admin" && 
-            (
-                <>
-                 {" | "}
-                 <Link href="/admin">Admin Panel</Link>
-                </>
-             
-            )
-        
-            }
+    {/* Right Side */}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "18px",
+      }}
+    >
+      {user ? (
+        <button
+          onClick={() => setDrawer(true)}
+          style={{
+            padding: "12px 20px",
+            border: "none",
+            borderRadius: "30px",
+            background: "#e50914",
+            color: "white",
+            fontWeight: "600",
+            cursor: "pointer",
+            fontSize: "15px",
+          }}
+        >
+          👤 {user.user.name}
+        </button>
+      ) : (
+        <>
+          <Link
+            href="/login"
+            style={{
+              color: "white",
+              textDecoration: "none",
+              fontWeight: "600",
+            }}
+          >
+            Log In
+          </Link>
 
-            </nav>
+          <Link
+            href="/signup"
+            style={{
+              padding: "10px 20px",
+              borderRadius: "25px",
+              background: "#e50914",
+              color: "white",
+              textDecoration: "none",
+              fontWeight: "600",
+            }}
+          >
+            Sign Up
+          </Link>
+        </>
+      )}
+    </div>
+  </nav>
 
-            <ProfileDrawer
-                open = {Drawer}
-                // Toggle function used wrapper function here, 
-                // This wrapper function changes every time when Drawer value changes
-                close = {()=>setDrawer(false)}
-            />
-
-
-        </div>
+  <ProfileDrawer
+    open={Drawer}
+    close={() => setDrawer(false)}
+  />
+</div>
     )
 }
 
