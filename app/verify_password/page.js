@@ -9,7 +9,7 @@ export default function verfy_current_Password(){
 
     const [ password , passwordFunc ] = useState("")
     const { user } = useAuth()
-    const id = user.user.id
+    const id = user?.user?.id
     const router = useRouter()
 
     async function formSumbit(e)

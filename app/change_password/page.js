@@ -9,12 +9,16 @@ export default function ChangePassword(){
     const [ newpassword , newpasswordFunc ] = useState("")
     const [ password , passwordFunc ] = useState("")
     const { user } = useAuth()
-    const id = user.user.id
+    const id = user?.user?.id;
     const router = useRouter()
 
     async function formSumbit(e)
     {
         e.preventDefault()
+        if (!id) {
+            alert("Please login first.");
+            return;
+        }
         try{
             if (newpassword !== password) 
             {
@@ -32,6 +36,10 @@ export default function ChangePassword(){
         catch(error){
             alert(error.response?.data?.detail || "Not connected to backend")
         }
+    }
+
+    if (!user) {
+        return <p>Loading...</p>;
     }
 
     return(

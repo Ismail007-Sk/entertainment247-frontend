@@ -9,8 +9,8 @@ export default function ChangeName(){
     const [ name , setName ] = useState("")
     const { user } = useAuth()
     const router = useRouter()
-    // console.log(user.user.id)
-    const id = user.user.id
+    // console.log(user?.user?.id)
+    const id = user?.user?.id
     console.log(id)
 
     async function submitForm(e){

@@ -39,7 +39,7 @@ export function ProfileDrawer({ open , close }){
 
 
 
-    // console.log(user.user.id)
+    // console.log(user?.user?.id)
     // This section open and close drawer from keyboadr response
     useEffect(()=>{
         if (!open) return 
@@ -77,7 +77,7 @@ export function ProfileDrawer({ open , close }){
     return(
         <div className="DrawerBody" onClick={handleClose}>
             <div  className={`InnerDrawer ${closing ? "closing" : ""}`} onClick={(e)=>e.stopPropagation()}>
-                <h2>{user.user.name}</h2>
+                <h2>{user?.user?.name}</h2>
                 <hr />
                 <Link href="/change_name">Change Name</Link>
                 <br/>
