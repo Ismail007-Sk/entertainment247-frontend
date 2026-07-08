@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/service/signup_service";
+import { sendWelcomeEmail } from "@/email/welcome_email";
 
 
 
@@ -21,6 +22,11 @@ export default function SignUp()
 
         try{
             const response = await signUp({name,email,password})
+            
+            // Send welcome email only if signup succeeds
+            if (response.success) {
+                await sendWelcomeEmail(name, email);
+            }
             alert(response.message)
             router.push("/login")
         }
