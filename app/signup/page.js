@@ -24,9 +24,13 @@ export default function SignUp()
             const response = await signUp({name,email,password})
             
             // Send welcome email only if signup succeeds
-            if (response.success) {
+            console.log(response);
+            console.log(response.success);
+           
+            if (response.message === "new user registered successfully") {
                 await sendWelcomeEmail(name, email);
             }
+
             alert(response.message)
             router.push("/login")
         }

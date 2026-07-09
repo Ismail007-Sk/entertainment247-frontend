@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { forgotPassword } from "@/service/login_service";
+import { sendOtpEmail } from "@/email/otp_email";
 
 export default function ForgotPassword(){
   
@@ -18,7 +19,13 @@ export default function ForgotPassword(){
 // from backend and then name useState or use other varible name accordingly
 
       const response = await forgotPassword({email})
-      alert(response.message)
+      const otp = response.otp
+
+      if (response.message === "OTP has been sent successfully.") {
+
+        console.log("entering in blcok")
+          await sendOtpEmail(email ,otp);
+      }
       router.push("/reset_password")
     }
     catch(error)
