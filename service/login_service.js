@@ -2,6 +2,7 @@ import API from "@/lib/api";
 
 // User Login
 export const loginUser = async (userData)=>{
+    console.log(process.env.NEXT_PUBLIC_API_URL);
     const response = await API.post("/login",userData)
     return response.data
 }
