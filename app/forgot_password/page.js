@@ -20,7 +20,7 @@ export default function ForgotPassword(){
 
       const response = await forgotPassword({email})
       const otp = response.otp
-      console.log("Getting otp from backend",otp)
+      // console.log("Getting otp from backend",otp)
       if (response.message === "OTP has been sent successfully.") {
 
         // console.log("entering in blcok")
