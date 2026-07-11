@@ -1,7 +1,7 @@
 import emailjs from "@emailjs/browser";
 
 export const sendOtpEmail = async (email, otp) => {
-
+    // console.log("Entering Block",otp)
     try {
         return await emailjs.send(
             process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
