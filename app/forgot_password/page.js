@@ -26,7 +26,7 @@ export default function ForgotPassword(){
         // console.log("entering in blcok")
         await sendOtpEmail(email ,otp);
       }
-      // router.push("/reset_password")
+      router.push("/reset_password")
     }
     catch(error)
     {
